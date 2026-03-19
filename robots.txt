@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://three-fire-s.github.io/sitemap.xml
