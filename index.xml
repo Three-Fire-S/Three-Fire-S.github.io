@@ -6,8 +6,15 @@
     <description>Recent content on 三火的个人小屋</description>
     <generator>Hugo -- 0.157.0</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 19 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Mar 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://three-fire-s.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ICA数学原理介绍</title>
+      <link>https://three-fire-s.github.io/notes/icaintroduction/</link>
+      <pubDate>Fri, 20 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://three-fire-s.github.io/notes/icaintroduction/</guid>
+      <description>这是一篇搬砖中的ICA数学原理介绍笔记，目的仅为记录自己的学习过程，适合新手小白，笔者可能会随时间不断精进。加油吧各位~</description>
+    </item>
     <item>
       <title>我的第一篇笔记</title>
       <link>https://three-fire-s.github.io/notes/my-first-note/</link>

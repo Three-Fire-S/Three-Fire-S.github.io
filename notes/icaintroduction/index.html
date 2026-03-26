@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>ICA数学原理介绍 | 三火的个人小屋</title>
+<meta name="keywords" content="ICA">
+<meta name="description" content="这是一篇搬砖中的ICA数学原理介绍笔记，目的仅为记录自己的学习过程，适合新手小白，笔者可能会随时间不断精进。加油吧各位~">
+<meta name="author" content="三火">
+<link rel="canonical" href="https://three-fire-s.github.io/notes/icaintroduction/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b20f4b743d503ecd47181175771c9e32d725cebf35f9563e136707adeb23a646.css" integrity="sha256-sg9LdD1QPs1HGBF1dxyeMtclzr81&#43;VY&#43;E2cHresjpkY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://three-fire-s.github.io/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://three-fire-s.github.io/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://three-fire-s.github.io/favicon.png">
+<link rel="apple-touch-icon" href="https://three-fire-s.github.io/favicon.png">
+<link rel="mask-icon" href="https://three-fire-s.github.io/favicon.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="zh" href="https://three-fire-s.github.io/notes/icaintroduction/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+<script>
+window.MathJax = {
+    tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style><meta property="og:title" content="ICA数学原理介绍" />
+<meta property="og:description" content="这是一篇搬砖中的ICA数学原理介绍笔记，目的仅为记录自己的学习过程，适合新手小白，笔者可能会随时间不断精进。加油吧各位~" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://three-fire-s.github.io/notes/icaintroduction/" /><meta property="article:section" content="notes" />
+<meta property="article:published_time" content="2026-03-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2026-03-26T00:00:00+00:00" />
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Notes",
+      "item": "https://three-fire-s.github.io/notes/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "ICA数学原理介绍",
+      "item": "https://three-fire-s.github.io/notes/icaintroduction/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ICA数学原理介绍",
+  "name": "ICA数学原理介绍",
+  "description": "这是一篇搬砖中的ICA数学原理介绍笔记，目的仅为记录自己的学习过程，适合新手小白，笔者可能会随时间不断精进。加油吧各位~",
+  "keywords": [
+    "ICA"
+  ],
+  "articleBody": "阅读提示 建议读者直接从ICA介绍开始阅读，当你遇到问题时，希望前文给出的一些数学基础可以帮助你，也推荐读者自行搜索，摸清ICA框架下的细节。\n背景 ICA是一种经常用于EEG信号伪迹去除的方法，方法来源是盲源问题的分析，经典例子是鸡尾酒会问题。\n笔者使用了EEGLAB中关于ICA的插件，发现在使用过程中无需在乎ICA的各种逻辑，just do it! 逻辑十分的简单粗暴，参数也几乎不用动，在这个过程中，笔者常常怀疑结果是否合理，为什么会合理。因此，笔者学习了一些关于ICA的底层原理和逻辑，希望能为自己未来的科研生涯做点好事。\n但行好事，无问前程。这句话写给今天为实习、为毕业很焦虑的我自己。\n数学基础：奇异值分解（SVD） 前言 所谓“基础”，仅仅是指进入一个领域或者了解一个方法的基石，并不代表内容本身很轻松很容易。这是一块让我自己也觉得头大的介绍内容，因为我在学习线性代数的时候并没有学过，“奇异值分解”的应用广泛性甚至让我质疑自己是否真正学过线代。Anyway，我想这部分的内容是很必要的，我想一边学一边完成对它的介绍。\n同时，由于我在本科阶段的数学物理学习过程中常常只关注了如何证明出来，常常对理论的意义认识不清、应用困难。回想起来，虽应对了考试，当常常面对拓展题一筹莫展，日后应用时，除了知道自己证过该理论，该理论合理，但根本不会用，不由得生出一种“丢了西瓜捡了芝麻”的感受。升入高年级后，也基本没有再证过某个理论了，手生也让我对曾学过的东西敬而远之。\n正因此，吸取教训，本文旨在让自己建立对知识的直观认识，无意于复杂的证明、逻辑推导等方面。\n定义 假设$M$是一个$m\\times n$阶矩阵，其中的元素全部属于域$K$，也就是实数域或复数域。如此则存在一个分解使得\n$$M=U\\Sigma V^H $$其中，$U$是$m\\times m$阶酉矩阵；$\\Sigma$是半正定$m\\times n$阶对角矩阵；而$V^H$即$V$的共轭转置，是$n\\times n$阶酉矩阵。\n这样的分解就称作$M$的奇异值分解，$\\Sigma$对角线上的元素$\\Sigma_i$即为$M$的奇异值。\n来自：奇异值分解_百度百科\n定义带给人的直接感受是：一个任意的矩阵都可以分解，分解成特定的矩阵乘积。定义中也出现了很多陌生的名词，找找百科逐一理顺。\n共轭转置 $A$的共轭转置矩阵用$A^H$来表示，与转置矩阵$A^T$的关系是$A^H=\\overline{A^T}$。对于$A=(a_{ij})$，用$\\overline{a}$表示$a$的共轭复数，$A^H=(\\overline{a_{ji}})$\n酉矩阵 幺正矩阵，Unitary matrix\n若一$n$行$n$列的复数矩阵$U$满足\n$$U^H U=UU^H=I_n$$其中$I_n$为n阶单位矩阵，则$U$成为酉矩阵，也即$U^{-1}=U^H$。若酉矩阵的元素都是实数，其即为正交矩阵。\n正定矩阵与半正定矩阵 对于二次型$f(x_1,x_2,\\cdots,x_n)$和与之对应的对称矩阵$A$，如果对于任意的$x=(x_1,x_2,\\cdots,x_n)^T\\in R^n$，都有$f(x)\\geq 0$\n当且仅当$x=0$时$f(x)=0$，那么称$f$为正定二次型，称$A$为正定矩阵 存在$x\\neq 0$时$f(x)=0$，那么称$f$为半正定二次型，称$A$为半正定矩阵 半正定矩阵的判定条件\n所有主子式非负 所有特征值非负 else，参考半正定矩阵_百度百科 看了定义，我们好像懂了，又好像没懂。有一种感觉是：你说了这么多，有什么用呢。真是一个好问题哈哈哈。精彩继续，马上回来。\n其实是我也不知道哈哈哈，好陌生的一个名词，没有接触过耶。不妨从特征分解开始吧。\n特征分解 相似矩阵 设$A$，$B$为$n$阶矩阵，若存在可逆矩阵$P$，使得$P^{-1}AP=B$，则称$A$与$B$是相似的，记作$A\\sim B$\n来自：《线性代数（第三版）》陈建龙等，定义4.1\n有什么用呢？这里插入书中的例子吧。\n设数列$\\lbrace x_n \\rbrace$，$\\lbrace y_n \\rbrace$满足$\\begin{cases} x_n = 3x_{n-1} - y_{n-1} \\ \\cr y_n = -x_{n-1} + 3y_{n-1} \\end{cases} $，其中$x_0=y_0=1$，求$x_n$，$y_n$\n在这个例子中，构造了$A=\\begin{pmatrix} 3 \u0026 -1 \\cr -1 \u0026 3 \\end{pmatrix} $，问题转换成求$A^n$，并假想存在可逆矩阵$P$，使得$P^{-1}AP=D$。由此引出了相似矩阵。\n总结书中提到的相似矩阵的性质如下：\n性质4.1 等价 性质4.2 多项式相似 性质4.3 行列式相等 性质4.4 秩相同 性质4.6 迹相同 为进一步引出特征值和特征向量，书中抛出了这样的一个问题：每个$n$阶矩阵均相似于对角阵吗？\n定理4.1\n$n$阶矩阵$A$相似于对角阵的充分必要条件是存在$n$个线性无关的列向量$\\xi_1,\\xi_2,\\cdots ,\\xi_n$和$n$个数$\\lambda_1,\\cdots ,\\lambda_n$使得$A\\xi_i=\\lambda_i\\xi_i(i=1,\\cdots ,n)$。此时，若令$P=(\\xi_1,\\xi_2,\\cdots ,\\xi_n)$，$\\Lambda=\\begin{bmatrix} \\lambda_1 \u0026 \\cdots \u0026 0 \\cr \\vdots \u0026 \\ddots \u0026 \\vdots \\cr 0 \u0026 \\cdots \u0026 \\lambda_n \\end{bmatrix} $，则$P^{-1}AP=\\Lambda$\n该定理提出了一个定义可相似对角化，但是显而易见，这个概念太严格了，$A$必须是满秩矩阵。如果无所谓秩呢？\n特征值和特征向量 基于定理4.1，引出了特征值和特征向量的定义。\n定义4.3\n设$A$为$n$阶矩阵，若存在数$\\lambda$和非零向量$\\xi$，满足$A\\xi=\\lambda\\xi$，则称$\\lambda$为$A$的一个特征值，称$\\xi$为$A$的属于特征值$\\lambda$的特征向量。\n求$A$的特征值与特征向量的步骤如下：\n计算$A$的特征多项式$|\\lambda E-A|$ 计算$|\\lambda E-A|=0$的全部根，这些根就是$A$的全部特征值 对每一个特征值$\\lambda_i,i=1,2,\\cdots ,n$，求线性方程组$(\\lambda_i E-A)x=0$的一个基础解系$\\eta_1,\\cdots ,\\eta_t$，于是$A$的属于$\\lambda_i$的全部特征向量为$k_1\\eta_1+\\cdots +k_t\\eta_t$，其中$k_1,\\cdots, k_t$为任意不全为零的数 现在我们学了很多了，然后呢，不知道，那就问问AI吧。\n豆包说特征分解用处\n提取一下信息：把复杂矩阵拆成简单部分，让计算更快、结构更清晰\n简化矩阵高次幂运算 线性变换的本质：特征向量方向上，只伸缩，不旋转、不扭曲 数据降维：PCA ICA else 看起来，计算或许就比较符合我们想要的意义了。但看起来从特征分解到奇异值分解，好像还有一段距离，是什么呢？或许我们更想说的是，看看ICA吧。\n补充 如果是第一次读到这里，为避免复杂的公式让你感到疲惫，不如先跳过这一部分；如果你刚从独立成分分析-求解跳转到这里，那我们就可以默认为你已经有了一些好奇心了，你想知道矩阵被分解后的每一部分都将怎么求解。抱着这样的好奇心，我搜寻到了一些参考资料，由于个人局限性，这一部分的内容无法做详尽的展开，我想你可以点开下面的参考资料，尤其推荐台湾学者周志成的线性代数网站奇异值分解专题 | 线代启示录，从这个网站中，你一定能和我一样收获良多。\n奇异值分解参考资料 奇异值分解（Singular Value Decomposition， SVD）笔记 - Clay-Technology World\n奇异值分解专题 | 线代启示录\n奇异值分解 （SVD） | 线代启示录\n线性代数基本定理 （四） | 线代启示录\nSVD 于矩阵近似的应用 | 线代启示录\n線性變換觀點下的奇異值分解 | 線代啟示錄\n特殊矩阵 （6）：正定矩阵 | 线代启示录\n特殊矩阵 （14）：Gramian 矩阵 | 线代启示录\n下面的内容只是很少的一部分摘要，建议读者移步奇异值分解专题 | 线代启示录。\nSVD定义\n假设$A$是一个$m\\times n$阶矩阵，其中的元素全部属于域$K$，也就是实数域或复数域。如此则存在一个分解使得\n$$A=U\\Sigma V^H $$其中，$U$是$m\\times m$阶酉矩阵；$\\Sigma$是半正定$m\\times n$阶对角矩阵；而$V^H$即$V$的共轭转置，是$n\\times n$阶酉矩阵。\n这样的分解就称作$M$的奇异值分解，$\\Sigma$对角线上的元素$\\Sigma_i$即为$M$的奇异值。\n来自：奇异值分解_百度百科\n直观理解SVD 图1 奇异值分解结构 其中，上图的 $r$ 代表矩阵 $A$ 的秩（Rank），即矩阵 $A$ 中线性独立行或列的最大数目，同时也是奇异值矩阵$\\Sigma$ 中非零奇异值的数量，表示着矩阵 $A$ 中所包含的独立信息。$\\Sigma$中只有左上角$r\\times r$区块对角线元素非零。\n如何计算SVD 计算SVD，遵循以下步骤：\n计算$A^TA$和$AA^T$ 求解$V$和$\\Sigma$：对$A^TA$做特征值分解，特征值的平方根为奇异值，用来建构$\\Sigma$，正规化后的特征向量组成$V$。 求解$U$，对$AA^T$做特征值分解，正规化后的特征向量组成$U$ 组合$U,\\Sigma,V^T$ 数学基础：概率统计的一些概念 协方差矩阵 【数学】方差、协方差、协方差矩阵 - LENMOD - 博客园\n独立成分分析（ICA） 参考文献 [1] SHLENS J, 2014. A tutorial on independent component analysis[A/OL]. arXiv[2025-10-22]. http://arxiv.org/abs/1404.2986. DOI:10.48550/arXiv.1404.2986. 盲源分离问题 ICA来源于盲源分离问题，为了更清楚地理解接下来的内容，我们需要陈述一下盲源分离问题。\n假设有原始信号组$s$，经过线性组合$A$，有观察信号$x$，即$x=As$。我们想做的事情是，已知$x$，是否能反推出$s$。很明显这是一个欠约束问题，就类似于$6=2\\times 3=1\\times 6,s=?$。\n而ICA的解决方法是用$x$的统计学信息提供更多的约束，毕竟实际中我们的$x$往往是空间$\\times$时间的矩阵呢，没理由放弃更多的信息。那到底该怎么做呢？\n求解 求解策略是“分而治之”的思想，专注于求$A$，并且考虑将$A$也分解成更简单更易求的部分，这就是SVD出现的地方。嘿，这个时候，难道不对“更易求”产生疑问吗？可能我们需要补充了一下SVD的知识了，怎么求这些“部分”呢？我将返回SVD部分继续学习补充。\nSVD-补充\n见者哀，闻者泪。很抱歉地告诉你的是，当你翻过了奇异值分解这座大山之后，你发现在ICA的数学推导中发挥最大作用的居然是概率统计。嗯……我知道这有一些离谱，明明学了这么多知识了。但还好的是，统计学的定理总要比矩阵好理解一点（maybe）。\n这两天也是波折不断，身体不适，心情烦躁。人真的只有在自己身体不舒服的时候才能意识到有一个健康、不拖后腿的身体有多么重要。\n言归正传，我们继续论文里的内容。\n0.假设 在ICA算法中，有以下假设：\n源信号和观察信号间有线性关系，即$x=As$ 源信号是白化信号，有$\\langle ss^T\\rangle=I$。用$\\langle \\cdot \\rangle$表示信号的均值，$\\langle ss^T\\rangle$表示$s$的协方差矩阵。 源信号之间互相独立 这三个假设增加了约束关系，也使得求解成为可能。\n1.矩阵分解 采用“分而治之”的思想，将矩阵$A$做奇异值分解。\n$$ A=U\\Sigma V^T \\tag{1-1} $$其中，$U^T=U^{-1}$，$V^T=V^{-1}$，$\\Sigma$为类对角矩阵。\n2.求$U$，$ \\Sigma$ 使用假设2“$\\langle ss^T\\rangle=I$”\n$$ \\begin{aligned} \\langle xx^T\\rangle \u0026= \\langle (As)(As)^T\\rangle \\\\ \u0026=\\langle (U\\Sigma Vs)(U\\Sigma Vs)^T\\rangle \\\\\u0026=U\\Sigma V\\langle ss^T\\rangle V^T \\Sigma U^T \\\\\u0026=U\\Sigma^2 U^T\\end{aligned} $$协方差矩阵是实对称矩阵，实对称矩阵可以相似对角化，即\n$$ \\langle xx^T\\rangle =EDE^T$$其中，$D$为对角矩阵，对角线上值为$\\langle xx^T\\rangle$的特征值，$E$为正交矩阵，每一列为对应的特征向量。\n联立我们的假设和实对称矩阵可相似对角化的定理，我们可以得到$U$、$\\Sigma$，即令$U=E$，$\\Sigma=D^{\\frac{1}{2}}$\n3.理解“白化”（whitening） 取$W$作为$A^{-1}$的估计。有$\\hat{s}=Wx$\n$$W=A^{-1}=(U\\Sigma V^T)^{-1}=V \\Sigma^{-1} U^T=VD^{-\\frac{1}{2}}E^T$$$$\\hat{s}=V(D^{-\\frac{1}{2}}E^Tx)=Vx_{w}$$在这里，用$x_w$表示“白化”（whitening）后的数据，$x_w=D^{-\\frac{1}{2}}E^Tx$。\n$$x \\xrightarrow{\\text{映射到主成分空间}} E^Tx\\xrightarrow{\\text{尺度（方差）归一化}}D^{-\\frac{1}{2}}E^Tx $$4.求V $V$的求解是所有ICA算法的核心，利用的是假设3“源信号之间互相独立”。也就是说，我们的$V$应该使得源信号的估计$\\hat{s}=Vx_w$尽可能独立。用什么样的指标来评估独立决定了目标函数的形式。在论文中，举例了以多信息（multi-information）作为评估函数，并进行简化，优化得到目标函数的过程。\n这里建议读者阅读论文原文，有不懂的可以询问AI，自己试着代一代公式，我们就不再赘述这一过程了。\n$$V = \\underset{V}{\\arg\\min} \\sum_i H\\left[ \\left( V x_w \\right)_i \\right]$$其中，$ H\\left[\\cdot \\right]$表示熵（entropy），$H[\\boldsymbol{y}] = -\\int P(\\boldsymbol{y}) \\log_2 P(\\boldsymbol{y}) d\\boldsymbol{y}$\n很明显，接下来要解的是一个最优化问题，由于问题的复杂性，我们无法得到解析解，我们只能通过各种算法（梯度下降、启发式）迭代求近似解。读者可以移步至胡理老师的《脑电信号处理与特征提取》第六章 第三节中关于ICA算法稳定性的讨论，这里附上对应英文版书籍的链接EEG Signal Processing and Feature Extraction | Springer Nature Link，读者可自行查阅。\n结语 写于2026-3-26\n书至这里，本人的第一篇博客就算是完成了，后续应该还会有很多需要补充的内容。希望作者本人能在不断学习中精进自己的理解和认识，为读者呈现上更好的内容。\n感谢陪伴。\n",
+  "wordCount" : "5569",
+  "inLanguage": "zh",
+  "datePublished": "2026-03-20T00:00:00Z",
+  "dateModified": "2026-03-26T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "三火"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://three-fire-s.github.io/notes/icaintroduction/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "三火的个人小屋",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://three-fire-s.github.io/favicon.png"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://three-fire-s.github.io/" accesskey="h" title="三火的个人小屋 (Alt + H)">三火的个人小屋</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://three-fire-s.github.io/notes/" title="笔记">
+                    <span>笔记</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://three-fire-s.github.io/about/" title="关于">
+                    <span>关于</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://three-fire-s.github.io/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://three-fire-s.github.io/search/" title="搜索 (Alt &#43; /)" accesskey=/>
+                    <span>搜索</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://three-fire-s.github.io/">主页</a>&nbsp;»&nbsp;<a href="https://three-fire-s.github.io/notes/">Notes</a></div>
+    <h1 class="post-title entry-hint-parent">
+      ICA数学原理介绍
+    </h1>
+    <div class="post-description">
+      这是一篇搬砖中的ICA数学原理介绍笔记，目的仅为记录自己的学习过程，适合新手小白，笔者可能会随时间不断精进。加油吧各位~
+    </div>
+    <div class="post-meta">发布于 <span title='2026-03-20 00:00:00 +0000 UTC'>2026-03-20</span>&nbsp;·&nbsp;更新于 <span title='2026-03-26 00:00:00 +0000 UTC'>2026-03-26</span>&nbsp;·&nbsp;5569 字&nbsp;·&nbsp;三火
+
+</div>
+  </header> <aside id="toc-container" class="toc-container wide">
+    <div class="toc">
+        <details >
+            <summary accesskey="c" title="(Alt + C)">
+                <span class="details">目录</span>
+            </summary>
+
+            <div class="inner"><ul>
+                    <li>
+                        <a href="#%e9%98%85%e8%af%bb%e6%8f%90%e7%a4%ba" aria-label="阅读提示">阅读提示</a></li>
+                    <li>
+                        <a href="#%e8%83%8c%e6%99%af" aria-label="背景">背景</a></li>
+                    <li>
+                        <a href="#%e6%95%b0%e5%ad%a6%e5%9f%ba%e7%a1%80%e5%a5%87%e5%bc%82%e5%80%bc%e5%88%86%e8%a7%a3svd" aria-label="数学基础：奇异值分解（SVD）">数学基础：奇异值分解（SVD）</a><ul>
+                            
+                    <li>
+                        <a href="#%e5%89%8d%e8%a8%80" aria-label="前言">前言</a></li>
+                    <li>
+                        <a href="#%e5%ae%9a%e4%b9%89" aria-label="定义">定义</a><ul>
+                            
+                    <li>
+                        <a href="#%e5%85%b1%e8%bd%ad%e8%bd%ac%e7%bd%ae" aria-label="共轭转置">共轭转置</a></li>
+                    <li>
+                        <a href="#%e9%85%89%e7%9f%a9%e9%98%b5" aria-label="酉矩阵">酉矩阵</a></li>
+                    <li>
+                        <a href="#%e6%ad%a3%e5%ae%9a%e7%9f%a9%e9%98%b5%e4%b8%8e%e5%8d%8a%e6%ad%a3%e5%ae%9a%e7%9f%a9%e9%98%b5" aria-label="正定矩阵与半正定矩阵">正定矩阵与半正定矩阵</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e7%89%b9%e5%be%81%e5%88%86%e8%a7%a3" aria-label="特征分解">特征分解</a><ul>
+                            
+                    <li>
+                        <a href="#%e7%9b%b8%e4%bc%bc%e7%9f%a9%e9%98%b5" aria-label="相似矩阵">相似矩阵</a></li>
+                    <li>
+                        <a href="#%e7%89%b9%e5%be%81%e5%80%bc%e5%92%8c%e7%89%b9%e5%be%81%e5%90%91%e9%87%8f" aria-label="特征值和特征向量">特征值和特征向量</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e8%a1%a5%e5%85%85" aria-label="补充">补充</a><ul>
+                            
+                    <li>
+                        <a href="#%e7%9b%b4%e8%a7%82%e7%90%86%e8%a7%a3svd" aria-label="直观理解SVD">直观理解SVD</a></li>
+                    <li>
+                        <a href="#%e5%a6%82%e4%bd%95%e8%ae%a1%e7%ae%97svd" aria-label="如何计算SVD">如何计算SVD</a></li></ul>
+                    </li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e6%95%b0%e5%ad%a6%e5%9f%ba%e7%a1%80%e6%a6%82%e7%8e%87%e7%bb%9f%e8%ae%a1%e7%9a%84%e4%b8%80%e4%ba%9b%e6%a6%82%e5%bf%b5" aria-label="数学基础：概率统计的一些概念">数学基础：概率统计的一些概念</a><ul>
+                            
+                    <li>
+                        <a href="#%e5%8d%8f%e6%96%b9%e5%b7%ae%e7%9f%a9%e9%98%b5" aria-label="协方差矩阵">协方差矩阵</a></li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e7%8b%ac%e7%ab%8b%e6%88%90%e5%88%86%e5%88%86%e6%9e%90ica" aria-label="独立成分分析（ICA）">独立成分分析（ICA）</a><ul>
+                            
+                    <li>
+                        <a href="#%e7%9b%b2%e6%ba%90%e5%88%86%e7%a6%bb%e9%97%ae%e9%a2%98" aria-label="盲源分离问题">盲源分离问题</a></li>
+                    <li>
+                        <a href="#%e6%b1%82%e8%a7%a3" aria-label="求解">求解</a><ul>
+                            
+                    <li>
+                        <a href="#0%e5%81%87%e8%ae%be" aria-label="0.假设">0.假设</a></li>
+                    <li>
+                        <a href="#1%e7%9f%a9%e9%98%b5%e5%88%86%e8%a7%a3" aria-label="1.矩阵分解">1.矩阵分解</a></li>
+                    <li>
+                        <a href="#2%e6%b1%82u-sigma" aria-label="2.求$U$，$ \Sigma$">2.求$U$，$ \Sigma$</a></li>
+                    <li>
+                        <a href="#3%e7%90%86%e8%a7%a3%e7%99%bd%e5%8c%96whitening" aria-label="3.理解“白化”（whitening）">3.理解“白化”（whitening）</a></li>
+                    <li>
+                        <a href="#4%e6%b1%82v" aria-label="4.求V">4.求V</a></li></ul>
+                    </li></ul>
+                    </li>
+                    <li>
+                        <a href="#%e7%bb%93%e8%af%ad" aria-label="结语">结语</a>
+                    </li>
+                </ul>
+            </div>
+        </details>
+    </div>
+</aside>
+<script>
+    let activeElement;
+    let elements;
+    
+    document.addEventListener('DOMContentLoaded', function (event) {
+        checkTocPosition();
+    
+        elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
+        if (elements.length > 0) {
+            
+            activeElement = elements[0];
+            const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
+            document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
+        }
+    
+        
+        const topLink = document.getElementById('top-link');
+        if (topLink) {
+            topLink.addEventListener('click', (event) => {
+                
+                event.preventDefault();
+    
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    }, false);
+    
+    window.addEventListener('resize', function(event) {
+        checkTocPosition();
+    }, false);
+    
+    window.addEventListener('scroll', () => {
+        
+        const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+        
+        if (scrollPosition === 0) {
+            return;
+        }
+    
+        
+        if (elements && elements.length > 0) {
+            
+            activeElement = Array.from(elements).find((element) => {
+                if ((getOffsetTop(element) - scrollPosition) > 0 && 
+                    (getOffsetTop(element) - scrollPosition) < window.innerHeight / 2) {
+                    return element;
+                }
+            }) || activeElement;
+    
+            elements.forEach(element => {
+                const id = encodeURI(element.getAttribute('id')).toLowerCase();
+                const tocLink = document.querySelector(`.inner ul li a[href="#${id}"]`);
+                if (element === activeElement){
+                    tocLink.classList.add('active');
+    
+                    
+                    const tocContainer = document.querySelector('.toc .inner');
+                    const linkOffsetTop = tocLink.offsetTop;
+                    const containerHeight = tocContainer.clientHeight;
+                    const linkHeight = tocLink.clientHeight;
+    
+                    
+                    const scrollPosition = linkOffsetTop - (containerHeight / 2) + (linkHeight / 2);
+                    tocContainer.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+                } else {
+                    tocLink.classList.remove('active');
+                }
+            });
+        }
+    }, false);
+    
+    const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
+    const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
+    const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
+    
+    function checkTocPosition() {
+        const width = document.body.scrollWidth;
+    
+        if (width - main - (toc * 2) - (gap * 4) > 0) {
+            document.getElementById("toc-container").classList.add("wide");
+        } else {
+            document.getElementById("toc-container").classList.remove("wide");
+        }
+    }
+    
+    function getOffsetTop(element) {
+        if (!element.getClientRects().length) {
+            return 0;
+        }
+        let rect = element.getBoundingClientRect();
+        let win = element.ownerDocument.defaultView;
+        return rect.top + win.pageYOffset;   
+    }
+    
+</script>
+
+  <div class="post-content"><h2 id="阅读提示">阅读提示<a hidden class="anchor" aria-hidden="true" href="#阅读提示">#</a></h2>
+<p>建议读者直接从<a href="/notes/icaintroduction/#%e7%9b%b2%e6%ba%90%e5%88%86%e7%a6%bb%e9%97%ae%e9%a2%98">ICA介绍</a>开始阅读，当你遇到问题时，希望前文给出的一些数学基础可以帮助你，也推荐读者自行搜索，摸清ICA框架下的细节。</p>
+<h2 id="背景">背景<a hidden class="anchor" aria-hidden="true" href="#背景">#</a></h2>
+<p>ICA是一种经常用于EEG信号伪迹去除的方法，方法来源是盲源问题的分析，经典例子是鸡尾酒会问题。</p>
+<p>笔者使用了EEGLAB中关于ICA的插件，发现在使用过程中无需在乎ICA的各种逻辑，just do it! 逻辑十分的简单粗暴，参数也几乎不用动，在这个过程中，笔者常常怀疑结果是否合理，为什么会合理。因此，笔者学习了一些关于ICA的底层原理和逻辑，希望能为自己未来的科研生涯做点好事。</p>
+<p>但行好事，无问前程。这句话写给今天为实习、为毕业很焦虑的我自己。</p>
+<h2 id="数学基础奇异值分解svd">数学基础：奇异值分解（SVD）<a hidden class="anchor" aria-hidden="true" href="#数学基础奇异值分解svd">#</a></h2>
+<h3 id="前言">前言<a hidden class="anchor" aria-hidden="true" href="#前言">#</a></h3>
+<p>所谓“基础”，仅仅是指进入一个领域或者了解一个方法的基石，并不代表内容本身很轻松很容易。这是一块让我自己也觉得头大的介绍内容，因为我在学习线性代数的时候并没有学过，“奇异值分解”的应用广泛性甚至让我质疑自己是否真正学过线代。Anyway，我想这部分的内容是很必要的，我想一边学一边完成对它的介绍。</p>
+<p>同时，由于我在本科阶段的数学物理学习过程中常常只关注了如何证明出来，常常对理论的意义认识不清、应用困难。回想起来，虽应对了考试，当常常面对拓展题一筹莫展，日后应用时，除了知道自己证过该理论，该理论合理，但根本不会用，不由得生出一种“丢了西瓜捡了芝麻”的感受。升入高年级后，也基本没有再证过某个理论了，手生也让我对曾学过的东西敬而远之。</p>
+<p>正因此，吸取教训，本文旨在让自己建立对知识的直观认识，无意于复杂的证明、逻辑推导等方面。</p>
+<h3 id="定义">定义<a hidden class="anchor" aria-hidden="true" href="#定义">#</a></h3>
+<blockquote>
+<p>假设$M$是一个$m\times n$阶矩阵，其中的元素全部属于域$K$，也就是实数域或复数域。如此则存在一个分解使得</p>
+$$M=U\Sigma V^H $$<p>其中，$U$是$m\times m$阶酉矩阵；$\Sigma$是半正定$m\times n$阶对角矩阵；而$V^H$即$V$的共轭转置，是$n\times n$阶酉矩阵。</p>
+<p>这样的分解就称作$M$的奇异值分解，$\Sigma$对角线上的元素$\Sigma_i$即为$M$的奇异值。</p>
+<p>来自：<a href="https://baike.baidu.com/item/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3/4968432">奇异值分解_百度百科</a></p>
+</blockquote>
+<p>定义带给人的直接感受是：一个任意的矩阵都可以分解，分解成特定的矩阵乘积。定义中也出现了很多陌生的名词，找找百科逐一理顺。</p>
+<h4 id="共轭转置">共轭转置<a hidden class="anchor" aria-hidden="true" href="#共轭转置">#</a></h4>
+<p>$A$的共轭转置矩阵用$A^H$来表示，与转置矩阵$A^T$的关系是$A^H=\overline{A^T}$。对于$A=(a_{ij})$，用$\overline{a}$表示$a$的共轭复数，$A^H=(\overline{a_{ji}})$</p>
+<h4 id="酉矩阵">酉矩阵<a hidden class="anchor" aria-hidden="true" href="#酉矩阵">#</a></h4>
+<p>幺正矩阵，Unitary matrix</p>
+<p>若一$n$行$n$列的复数矩阵$U$满足</p>
+$$U^H U=UU^H=I_n$$<p>其中$I_n$为n阶单位矩阵，则$U$成为<strong>酉矩阵</strong>，也即$U^{-1}=U^H$。<u>若酉矩阵的元素都是实数，其即为正交矩阵</u>。</p>
+<h4 id="正定矩阵与半正定矩阵">正定矩阵与半正定矩阵<a hidden class="anchor" aria-hidden="true" href="#正定矩阵与半正定矩阵">#</a></h4>
+<p>对于二次型$f(x_1,x_2,\cdots,x_n)$和与之对应的对称矩阵$A$，如果对于任意的$x=(x_1,x_2,\cdots,x_n)^T\in R^n$，都有$f(x)\geq 0$</p>
+<ul>
+<li>当且仅当$x=0$时$f(x)=0$，那么称$f$为正定二次型，称$A$为正定矩阵</li>
+<li>存在$x\neq 0$时$f(x)=0$，那么称$f$为半正定二次型，称$A$为半正定矩阵</li>
+</ul>
+<blockquote>
+<p>半正定矩阵的判定条件</p>
+<ol>
+<li>所有主子式非负</li>
+<li>所有特征值非负</li>
+<li>else，参考<a href="https://baike.baidu.com/item/%E5%8D%8A%E6%AD%A3%E5%AE%9A%E7%9F%A9%E9%98%B5/2152711">半正定矩阵_百度百科</a></li>
+</ol>
+</blockquote>
+<p>看了定义，我们好像懂了，又好像没懂。有一种感觉是：你说了这么多，有什么用呢。真是一个好问题哈哈哈。精彩继续，马上回来。</p>
+<p>其实是我也不知道哈哈哈，好陌生的一个名词，没有接触过耶。不妨从特征分解开始吧。</p>
+<h3 id="特征分解">特征分解<a hidden class="anchor" aria-hidden="true" href="#特征分解">#</a></h3>
+<h4 id="相似矩阵">相似矩阵<a hidden class="anchor" aria-hidden="true" href="#相似矩阵">#</a></h4>
+<blockquote>
+<p>设$A$，$B$为$n$阶矩阵，若存在可逆矩阵$P$，使得$P^{-1}AP=B$，则称$A$与$B$是相似的，记作$A\sim B$</p>
+<p>来自：《线性代数（第三版）》陈建龙等，定义4.1</p>
+</blockquote>
+<p>有什么用呢？这里插入书中的例子吧。</p>
+<blockquote>
+<p>设数列$\lbrace x_n \rbrace$，$\lbrace y_n \rbrace$满足$\begin{cases} x_n = 3x_{n-1} - y_{n-1}  \ \cr  y_n = -x_{n-1} + 3y_{n-1} \end{cases} $，其中$x_0=y_0=1$，求$x_n$，$y_n$</p>
+</blockquote>
+<p>在这个例子中，构造了$A=\begin{pmatrix} 3 &amp; -1 \cr -1 &amp; 3 \end{pmatrix} $，问题转换成求$A^n$，并假想存在可逆矩阵$P$，使得$P^{-1}AP=D$。由此引出了相似矩阵。</p>
+<p>总结书中提到的相似矩阵的性质如下：</p>
+<blockquote>
+<ul>
+<li>性质4.1 等价</li>
+<li>性质4.2 多项式相似</li>
+<li>性质4.3 行列式相等</li>
+<li>性质4.4 秩相同</li>
+<li>性质4.6 迹相同</li>
+</ul>
+</blockquote>
+<p>为进一步引出特征值和特征向量，书中抛出了这样的一个问题：每个$n$阶矩阵均相似于对角阵吗？</p>
+<blockquote>
+<p>定理4.1</p>
+<p>$n$阶矩阵$A$相似于对角阵的充分必要条件是存在$n$个线性无关的列向量$\xi_1,\xi_2,\cdots ,\xi_n$和$n$个数$\lambda_1,\cdots ,\lambda_n$使得$A\xi_i=\lambda_i\xi_i(i=1,\cdots ,n)$。此时，若令$P=(\xi_1,\xi_2,\cdots ,\xi_n)$，$\Lambda=\begin{bmatrix}  \lambda_1 &amp;  \cdots &amp; 0 \cr   \vdots  &amp; \ddots &amp; \vdots \cr    0  &amp; \cdots &amp; \lambda_n  \end{bmatrix} $，则$P^{-1}AP=\Lambda$</p>
+</blockquote>
+<p>该定理提出了一个定义<strong>可相似对角化</strong>，但是显而易见，这个概念太严格了，$A$必须是满秩矩阵。如果无所谓秩呢？</p>
+<h4 id="特征值和特征向量">特征值和特征向量<a hidden class="anchor" aria-hidden="true" href="#特征值和特征向量">#</a></h4>
+<p>基于定理4.1，引出了特征值和特征向量的定义。</p>
+<blockquote>
+<p>定义4.3</p>
+<p>设$A$为$n$阶矩阵，若存在数$\lambda$和非零向量$\xi$，满足$A\xi=\lambda\xi$，则称$\lambda$为$A$的一个<strong>特征值</strong>，称$\xi$为$A$的属于特征值$\lambda$的<strong>特征向量</strong>。</p>
+</blockquote>
+<p>求$A$的特征值与特征向量的步骤如下：</p>
+<blockquote>
+<ol>
+<li>计算$A$的特征多项式$|\lambda E-A|$</li>
+<li>计算$|\lambda E-A|=0$的全部根，这些根就是$A$的全部特征值</li>
+<li>对每一个特征值$\lambda_i,i=1,2,\cdots ,n$，求线性方程组$(\lambda_i E-A)x=0$的一个基础解系$\eta_1,\cdots ,\eta_t$，于是$A$的属于$\lambda_i$的全部特征向量为$k_1\eta_1+\cdots +k_t\eta_t$，其中$k_1,\cdots, k_t$为任意不全为零的数</li>
+</ol>
+</blockquote>
+<p>现在我们学了很多了，然后呢，不知道，那就问问AI吧。</p>
+<blockquote>
+<p><a href="https://www.doubao.com/thread/w999bb5916c2be557">豆包说特征分解用处</a></p>
+<p>提取一下信息：<strong>把复杂矩阵拆成简单部分，让计算更快、结构更清晰</strong></p>
+<ol>
+<li>简化矩阵高次幂运算</li>
+<li><strong>线性变换的本质</strong>：特征向量方向上，只伸缩，不旋转、不扭曲</li>
+<li>数据降维：PCA ICA</li>
+<li>else</li>
+</ol>
+</blockquote>
+<p>看起来，<strong>计算</strong>或许就比较符合我们想要的意义了。但看起来从特征分解到奇异值分解，好像还有一段距离，是什么呢？或许我们更想说的是，看看ICA吧。</p>
+<h3 id="补充">补充<a hidden class="anchor" aria-hidden="true" href="#补充">#</a></h3>
+<p>如果是第一次读到这里，为避免复杂的公式让你感到疲惫，不如先跳过这一部分；如果你刚从<a href="/notes/icaintroduction/#%e6%b1%82%e8%a7%a3">独立成分分析-求解</a>跳转到这里，那我们就可以默认为你已经有了一些好奇心了，你想知道矩阵被分解后的每一部分都将怎么求解。抱着这样的好奇心，我搜寻到了一些参考资料，由于个人局限性，这一部分的内容无法做详尽的展开，我想你可以点开下面的参考资料，尤其推荐台湾学者周志成的线性代数网站<a href="https://ccjou.wordpress.com/%E5%B0%88%E9%A1%8C%E6%8E%A2%E7%A9%B6/%E5%A5%87%E7%95%B0%E5%80%BC%E5%88%86%E8%A7%A3%E5%B0%88%E9%A1%8C/">奇异值分解专题 | 线代启示录</a>，从这个网站中，你一定能和我一样收获良多。</p>
+<div class="details admonition tip">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>奇异值分解参考资料<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><a href="https://clay-atlas.com/blog/2024/08/11/cn-singular-value-decomposition-svd/">奇异值分解（Singular Value Decomposition， SVD）笔记 - Clay-Technology World</a></p>
+<p><a href="https://ccjou.wordpress.com/%E5%B0%88%E9%A1%8C%E6%8E%A2%E7%A9%B6/%E5%A5%87%E7%95%B0%E5%80%BC%E5%88%86%E8%A7%A3%E5%B0%88%E9%A1%8C/">奇异值分解专题 | 线代启示录</a></p>
+<p><a href="https://ccjou.wordpress.com/2009/09/01/%E5%A5%87%E7%95%B0%E5%80%BC%E5%88%86%E8%A7%A3-svd/">奇异值分解 （SVD） | 线代启示录</a></p>
+<p><a href="https://ccjou.wordpress.com/2009/05/27/%E7%B7%9A%E6%80%A7%E4%BB%A3%E6%95%B8%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86-%E5%9B%9B/">线性代数基本定理 （四） | 线代启示录</a></p>
+<p><a href="https://ccjou.wordpress.com/2010/06/12/svd-%E6%96%BC%E7%9F%A9%E9%99%A3%E8%BF%91%E4%BC%BC%E7%9A%84%E6%87%89%E7%94%A8/">SVD 于矩阵近似的应用 | 线代启示录</a></p>
+<p><a href="https://ccjou.wordpress.com/2013/01/17/%E7%B7%9A%E6%80%A7%E8%AE%8A%E6%8F%9B%E8%A7%80%E9%BB%9E%E4%B8%8B%E7%9A%84%E5%A5%87%E7%95%B0%E5%80%BC%E5%88%86%E8%A7%A3/">線性變換觀點下的奇異值分解 | 線代啟示錄</a></p>
+<p><a href="https://ccjou.wordpress.com/2009/10/01/%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%99%A3-%E5%85%AD%EF%BC%9A%E6%AD%A3%E5%AE%9A%E7%9F%A9%E9%99%A3/">特殊矩阵 （6）：正定矩阵 | 线代启示录</a></p>
+<p><a href="https://ccjou.wordpress.com/2011/03/07/%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%99%A3-14%EF%BC%9Agramian-%E7%9F%A9%E9%99%A3/">特殊矩阵 （14）：Gramian 矩阵 | 线代启示录</a></p>
+</div>
+        </div>
+    </div>
+<p>下面的内容只是很少的一部分摘要，建议读者移步<a href="https://ccjou.wordpress.com/%E5%B0%88%E9%A1%8C%E6%8E%A2%E7%A9%B6/%E5%A5%87%E7%95%B0%E5%80%BC%E5%88%86%E8%A7%A3%E5%B0%88%E9%A1%8C/">奇异值分解专题 | 线代启示录</a>。</p>
+<blockquote>
+<p>SVD定义</p>
+<p>假设$A$是一个$m\times n$阶矩阵，其中的元素全部属于域$K$，也就是实数域或复数域。如此则存在一个分解使得</p>
+$$A=U\Sigma V^H $$<p>其中，$U$是$m\times m$阶酉矩阵；$\Sigma$是半正定$m\times n$阶对角矩阵；而$V^H$即$V$的共轭转置，是$n\times n$阶酉矩阵。</p>
+<p>这样的分解就称作$M$的奇异值分解，$\Sigma$对角线上的元素$\Sigma_i$即为$M$的奇异值。</p>
+<p>来自：<a href="https://baike.baidu.com/item/%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3/4968432">奇异值分解_百度百科</a></p>
+</blockquote>
+<h4 id="直观理解svd">直观理解SVD<a hidden class="anchor" aria-hidden="true" href="#直观理解svd">#</a></h4>
+<center><figure>
+    <img loading="lazy" src="svd.png" width="80%"/> <figcaption>
+            图1 奇异值分解结构
+        </figcaption>
+</figure>
+</center>
+<p>其中，上图的 $r$ 代表矩阵 $A$ 的秩（Rank），即矩阵 $A$ 中线性独立行或列的最大数目，同时也是奇异值矩阵$\Sigma$ 中<strong>非零奇异值</strong>的数量，表示着矩阵 $A$ 中所包含的独立信息。$\Sigma$中只有左上角$r\times r$区块对角线元素非零。</p>
+<h4 id="如何计算svd">如何计算SVD<a hidden class="anchor" aria-hidden="true" href="#如何计算svd">#</a></h4>
+<p>计算SVD，遵循以下步骤：</p>
+<ol>
+<li>计算$A^TA$和$AA^T$</li>
+<li>求解$V$和$\Sigma$：对$A^TA$做特征值分解，特征值的平方根为奇异值，用来建构$\Sigma$，正规化后的特征向量组成$V$。</li>
+<li>求解$U$，对$AA^T$做特征值分解，正规化后的特征向量组成$U$</li>
+<li>组合$U,\Sigma,V^T$</li>
+</ol>
+<h2 id="数学基础概率统计的一些概念">数学基础：概率统计的一些概念<a hidden class="anchor" aria-hidden="true" href="#数学基础概率统计的一些概念">#</a></h2>
+<h3 id="协方差矩阵">协方差矩阵<a hidden class="anchor" aria-hidden="true" href="#协方差矩阵">#</a></h3>
+<p><a href="https://www.cnblogs.com/LENMOD/p/13596762.html">【数学】方差、协方差、协方差矩阵 - LENMOD - 博客园</a></p>
+<h2 id="独立成分分析ica">独立成分分析（ICA）<a hidden class="anchor" aria-hidden="true" href="#独立成分分析ica">#</a></h2>
+<div class="details admonition info">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>参考文献<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">[1] SHLENS J, 2014. A tutorial on independent component analysis[A/OL]. arXiv[2025-10-22]. <a href="http://arxiv.org/abs/1404.2986">http://arxiv.org/abs/1404.2986</a>. DOI:<a href="https://doi.org/10.48550/arXiv.1404.2986">10.48550/arXiv.1404.2986</a>.</div>
+        </div>
+    </div>
+<h3 id="盲源分离问题">盲源分离问题<a hidden class="anchor" aria-hidden="true" href="#盲源分离问题">#</a></h3>
+<p>ICA来源于盲源分离问题，为了更清楚地理解接下来的内容，我们需要陈述一下盲源分离问题。</p>
+<p>假设有原始信号组$s$，经过线性组合$A$，有观察信号$x$，即$x=As$。我们想做的事情是，已知$x$，是否能反推出$s$。很明显这是一个欠约束问题，就类似于$6=2\times 3=1\times 6,s=?$。</p>
+<p>而ICA的解决方法是用$x$的统计学信息提供更多的约束，毕竟实际中我们的$x$往往是空间$\times$时间的矩阵呢，没理由放弃更多的信息。那到底该怎么做呢？</p>
+<h3 id="求解">求解<a hidden class="anchor" aria-hidden="true" href="#求解">#</a></h3>
+<p>求解策略是“分而治之”的思想，专注于求$A$，并且考虑将$A$也分解成更简单更易求的部分，这就是SVD出现的地方。嘿，这个时候，难道不对“更易求”产生疑问吗？可能我们需要补充了一下SVD的知识了，怎么求这些“部分”呢？我将返回SVD部分继续学习补充。</p>
+<p><a href="/notes/icaintroduction/#%e8%a1%a5%e5%85%85">SVD-补充</a></p>
+<p>见者哀，闻者泪。很抱歉地告诉你的是，当你翻过了奇异值分解这座大山之后，你发现在ICA的数学推导中发挥最大作用的居然是概率统计。嗯……我知道这有一些离谱，明明学了这么多知识了。但还好的是，统计学的定理总要比矩阵好理解一点（maybe）。</p>
+<p>这两天也是波折不断，身体不适，心情烦躁。人真的只有在自己身体不舒服的时候才能意识到有一个健康、不拖后腿的身体有多么重要。</p>
+<p>言归正传，我们继续论文里的内容。</p>
+<h4 id="0假设">0.假设<a hidden class="anchor" aria-hidden="true" href="#0假设">#</a></h4>
+<p>在ICA算法中，有以下假设：</p>
+<ol>
+<li>源信号和观察信号间有线性关系，即$x=As$</li>
+<li>源信号是白化信号，有$\langle ss^T\rangle=I$。用$\langle \cdot \rangle$表示信号的均值，$\langle ss^T\rangle$表示$s$的协方差矩阵。</li>
+<li>源信号之间互相独立</li>
+</ol>
+<p>这三个假设增加了约束关系，也使得求解成为可能。</p>
+<h4 id="1矩阵分解">1.矩阵分解<a hidden class="anchor" aria-hidden="true" href="#1矩阵分解">#</a></h4>
+<p>采用“分而治之”的思想，将矩阵$A$做奇异值分解。</p>
+$$ A=U\Sigma V^T \tag{1-1} $$<p>其中，$U^T=U^{-1}$，$V^T=V^{-1}$，$\Sigma$为类对角矩阵。</p>
+<h4 id="2求u-sigma">2.求$U$，$ \Sigma$<a hidden class="anchor" aria-hidden="true" href="#2求u-sigma">#</a></h4>
+<p>使用假设2“$\langle ss^T\rangle=I$”</p>
+$$ \begin{aligned} \langle xx^T\rangle &= \langle (As)(As)^T\rangle \\ &=\langle (U\Sigma Vs)(U\Sigma Vs)^T\rangle \\&=U\Sigma V\langle ss^T\rangle V^T \Sigma U^T \\&=U\Sigma^2 U^T\end{aligned} $$<p>协方差矩阵是实对称矩阵，实对称矩阵可以相似对角化，即</p>
+$$ \langle xx^T\rangle =EDE^T$$<p>其中，$D$为对角矩阵，对角线上值为$\langle xx^T\rangle$的特征值，$E$为正交矩阵，每一列为对应的特征向量。</p>
+<p>联立我们的假设和实对称矩阵可相似对角化的定理，我们可以得到$U$、$\Sigma$，即令$U=E$，$\Sigma=D^{\frac{1}{2}}$</p>
+<h4 id="3理解白化whitening">3.理解“白化”（whitening）<a hidden class="anchor" aria-hidden="true" href="#3理解白化whitening">#</a></h4>
+<p>取$W$作为$A^{-1}$的估计。有$\hat{s}=Wx$</p>
+$$W=A^{-1}=(U\Sigma V^T)^{-1}=V \Sigma^{-1} U^T=VD^{-\frac{1}{2}}E^T$$$$\hat{s}=V(D^{-\frac{1}{2}}E^Tx)=Vx_{w}$$<p>在这里，用$x_w$表示“白化”（whitening）后的数据，$x_w=D^{-\frac{1}{2}}E^Tx$。</p>
+$$x \xrightarrow{\text{映射到主成分空间}} E^Tx\xrightarrow{\text{尺度（方差）归一化}}D^{-\frac{1}{2}}E^Tx $$<h4 id="4求v">4.求V<a hidden class="anchor" aria-hidden="true" href="#4求v">#</a></h4>
+<p>$V$的求解是所有ICA算法的核心，利用的是假设3“源信号之间互相独立”。也就是说，我们的$V$应该使得源信号的估计$\hat{s}=Vx_w$尽可能<strong>独立</strong>。用什么样的指标来评估独立决定了目标函数的形式。在论文中，举例了以<u><strong>多信息</strong></u>（multi-information）作为评估函数，并进行简化，优化得到目标函数的过程。</p>
+<p>这里建议读者阅读论文原文，有不懂的可以询问AI，自己试着代一代公式，我们就不再赘述这一过程了。</p>
+$$V = \underset{V}{\arg\min} \sum_i H\left[ \left( V x_w \right)_i \right]$$<p>其中，$ H\left[\cdot \right]$表示熵（entropy），$H[\boldsymbol{y}] = -\int P(\boldsymbol{y}) \log_2 P(\boldsymbol{y})  d\boldsymbol{y}$</p>
+<p>很明显，接下来要解的是一个最优化问题，由于问题的复杂性，我们无法得到解析解，我们只能通过各种算法（梯度下降、启发式）迭代求近似解。读者可以移步至胡理老师的《脑电信号处理与特征提取》第六章 第三节中关于ICA算法稳定性的讨论，这里附上对应英文版书籍的链接<a href="https://link.springer.com/book/10.1007/978-981-13-9113-2">EEG Signal Processing and Feature Extraction | Springer Nature Link</a>，读者可自行查阅。</p>
+<h2 id="结语">结语<a hidden class="anchor" aria-hidden="true" href="#结语">#</a></h2>
+<p>写于2026-3-26</p>
+<p>书至这里，本人的第一篇博客就算是完成了，后续应该还会有很多需要补充的内容。希望作者本人能在不断学习中精进自己的理解和认识，为读者呈现上更好的内容。</p>
+<p>感谢陪伴。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://three-fire-s.github.io/tags/ica/">ICA</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://three-fire-s.github.io/notes/my-first-note/">
+    <span class="title">下一页 »</span>
+    <br>
+    <span>我的第一篇笔记</span>
+  </a>
+</nav>
+
+  </footer><script src="https://utteranc.es/client.js"
+    repo="Three-Fire-S/Three-Fire-S.github.io"
+    issue-term="pathname"
+    theme="github-light"
+    crossorigin="anonymous"
+    async>
+</script>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://three-fire-s.github.io/">三火的个人小屋</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+<script>
+    let details = document.getElementsByClassName('details')
+    details = details || [];
+    for (let i = 0; i < details.length; i++) {
+        let element = details[i]
+        const summary = element.getElementsByClassName('details-summary')[0];
+        if (summary) {
+            summary.addEventListener('click', () => {
+                element.classList.toggle('open');
+            }, false);
+        }
+    }
+</script>
+
+<script>
+document.querySelectorAll('pre > code').forEach((codeBlock) => {
+    const codeBlockWrap = codeBlock.closest('.pe-code-block-wrap')
+    const copyButton = codeBlockWrap.querySelector('button')
+
+    function copyingDone() {
+        copyButton.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="pe-icon"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.0633 5.67375C18.5196 5.98487 18.6374 6.607 18.3262 7.06331L10.8262 18.0633C10.6585 18.3093 10.3898 18.4678 10.0934 18.4956C9.79688 18.5234 9.50345 18.4176 9.29289 18.2071L4.79289 13.7071C4.40237 13.3166 4.40237 12.6834 4.79289 12.2929C5.18342 11.9023 5.81658 11.9023 6.20711 12.2929L9.85368 15.9394L16.6738 5.93664C16.9849 5.48033 17.607 5.36263 18.0633 5.67375Z" fill="currentColor"></path></svg>'
+        setTimeout(() => {
+            copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" class="pe-icon"><path fill="currentColor" fill-rule="evenodd" d="M7 5a3 3 0 0 1 3-3h9a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v2a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h2zm2 2h5a3 3 0 0 1 3 3v5h2a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1zM5 9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1z" clip-rule="evenodd"></path></svg>'
+        }, 2000);
+    }
+
+    copyButton.addEventListener('click', (cb) => {
+        
+        cb.stopPropagation();
+        if ('clipboard' in navigator) {
+            navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                copyingDone();
+            })
+            return;
+        }
+        const range = document.createRange();
+        range.selectNodeContents(codeBlock);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        try {
+            document.execCommand('copy');
+            copyingDone();
+        } catch (e) {
+        }
+        selection.removeRange(range);
+    });
+});
+
+let peCodeDetails = document.getElementsByClassName('pe-code-details')
+for (let element of peCodeDetails) {
+    const peCodeSummary = element.getElementsByClassName('pe-code-details-summary')[0];
+    if (peCodeSummary) {
+        peCodeSummary.addEventListener('click', () => {
+            if (element.classList.contains('open')) {
+                element.classList.remove('open');
+                element.classList.remove('scrollable');
+            } else {
+                element.classList.add('open');
+                setTimeout(() => {
+                    element.classList.add('scrollable');
+                }, 800);
+            }
+        }, false);
+    }
+}
+</script>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = '复制';
+
+        function copyingDone() {
+            copybutton.innerHTML = '已复制！';
+            setTimeout(() => {
+                copybutton.innerHTML = '复制';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
