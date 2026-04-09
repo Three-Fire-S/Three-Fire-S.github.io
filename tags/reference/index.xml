@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Reference on 三火的精神自留地</title>
-    <link>http://localhost:1313/tags/reference/</link>
+    <link>https://three-fire-s.github.io/tags/reference/</link>
     <description>Recent content in Reference on 三火的精神自留地</description>
     <generator>Hugo -- 0.157.0</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 09 Apr 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/reference/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://three-fire-s.github.io/tags/reference/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>参考资料一览-EEG学习</title>
-      <link>http://localhost:1313/notes/resources-for-eeglearn/</link>
+      <link>https://three-fire-s.github.io/notes/resources-for-eeglearn/</link>
       <pubDate>Thu, 09 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/resources-for-eeglearn/</guid>
+      <guid>https://three-fire-s.github.io/notes/resources-for-eeglearn/</guid>
       <description>这篇笔记将收纳一下EEG学习过程中可能会用到的参考资料，持续更新ing</description>
     </item>
   </channel>

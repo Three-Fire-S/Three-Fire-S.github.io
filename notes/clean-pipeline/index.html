@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>预处理流程-CLEAN pipeline | 三火的精神自留地</title>
 <meta name="keywords" content="preprocessing">
 <meta name="description" content="本文旨在收集论文中的EEG预处理流程，以给实际中的预处理吃下一颗定心丸。">
 <meta name="author" content="三火">
-<link rel="canonical" href="http://localhost:1313/notes/clean-pipeline/">
+<link rel="canonical" href="https://three-fire-s.github.io/notes/clean-pipeline/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.b20f4b743d503ecd47181175771c9e32d725cebf35f9563e136707adeb23a646.css" integrity="sha256-sg9LdD1QPs1HGBF1dxyeMtclzr81&#43;VY&#43;E2cHresjpkY=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.png">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/favicon.png">
-<link rel="mask-icon" href="http://localhost:1313/favicon.png">
+<link rel="icon" href="https://three-fire-s.github.io/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://three-fire-s.github.io/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://three-fire-s.github.io/favicon.png">
+<link rel="apple-touch-icon" href="https://three-fire-s.github.io/favicon.png">
+<link rel="mask-icon" href="https://three-fire-s.github.io/favicon.png">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="zh" href="http://localhost:1313/notes/clean-pipeline/">
+<link rel="alternate" hreflang="zh" href="https://three-fire-s.github.io/notes/clean-pipeline/">
 <noscript>
     <style>
         #theme-toggle,
@@ -81,7 +81,68 @@ code.has-jax {
     border: inherit;
     color: #515151;
 }
-</style>
+</style><meta property="og:title" content="预处理流程-CLEAN pipeline" />
+<meta property="og:description" content="本文旨在收集论文中的EEG预处理流程，以给实际中的预处理吃下一颗定心丸。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://three-fire-s.github.io/notes/clean-pipeline/" /><meta property="article:section" content="notes" />
+<meta property="article:published_time" content="2026-04-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2026-04-09T00:00:00+00:00" />
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Notes",
+      "item": "https://three-fire-s.github.io/notes/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "预处理流程-CLEAN pipeline",
+      "item": "https://three-fire-s.github.io/notes/clean-pipeline/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "预处理流程-CLEAN pipeline",
+  "name": "预处理流程-CLEAN pipeline",
+  "description": "本文旨在收集论文中的EEG预处理流程，以给实际中的预处理吃下一颗定心丸。",
+  "keywords": [
+    "preprocessing"
+  ],
+  "articleBody": " 参考文献 [1] BÖTTCHER A, WENDIGGENSEN P, MÜCKSCHEL M, 等, 2026. Standardizing EEG preprocessing for cross-site integration - the CLEAN pipeline[J/OL]. NeuroImage, 328: 121812. DOI:10.1016/j.neuroimage.2026.121812. 论文背景与介绍 应用面向：数据集成(data integration)\n做法：统一预处理流程(harmonize EEG preprocessing)\n支持机构：the German Center for Child and Adolescent Health (DZKJ)\n论文内容 Introduction 标准化预处理的目的是保证数据质量和跨研究间的可复现性（reproducibility）。\nEEG分析方法进步飞速（源定位、脑区相关；机器学习），然而，分析结果强依赖于预处理，但预处理仍然是神经生理数据分析中最欠缺标准化的步骤之一，预处理方法的不同会导致不一致性。\n“The preprocessing of EEG data remains one of the least standardized steps in neurophysiological data analysis.” 。(Böttcher 等, 2026, p. 2)\n“Differences in the applied filters, artifact correction methods with varying impact on the data, and different quality control criteria lead to inconsistencies across studies and research sites” (Böttcher 等, 2026, p. 2)\nreproducibility replicability 同一数据+同一方法 新数据+同一方法 之后介绍了本文目的，简单介绍CLEAN-EEG preprocessing pipeline。\nDataset 介绍本文使用的样例数据\n数据：健康青少年，N=10，5男5女，年龄$11.7\\pm 2.8$，Go/Nogo任务\n条件记录：采样率500Hz，BrainAmp DC放大器，BrainCap脑电采集帽（60个Ag/AgCl电极，参考电极是Fpz，结点电极位置在$\\theta=58,\\phi=78$），没有采集眼电。\nData availiability 代码链接：https://gitlab.mn.tu-dresden.de/actionlab/clean-eeg-preprocessing-pipeline/\n数据链接：http://doi.org/10.5281/zenodo.16739024\nRequirements EEGLAB（MATLAB 2020a之后的版本）\nthe CLEAN pipeline CLEAN流水线利用了一系列后续的MATLAB脚本。所有脚本都使用共享配置文件，其中可以定义最关键的参数和设置。每个脚本都会生成一个日志文件，保存在输出路径中，存储与脚本相关的所有参数，并按照开放科学的最佳实践指南记录相应脚本的工作流程（Pernet 等，2020,2021）。以下详细说明了各项预处理步骤及作者提出的参数。\n数据秩（rank）：提供了数据线性独立成分的个数，与通道数有关。数据桥连、重参考或线性插值坏道导致秩亏（rank deficiency）。秩亏会导致ICA分解结果出现“幽灵”成分。\n图1 CLEAN流程图 Configuration 关于配置文件中参数调整的说明\nLogfiles 双数据结构分层记录 日志记录采用 “被试专属 + 全被试汇总” 的双层结构，确保数据追溯的精准性与全面性：\n单被试级记录：每一步预处理操作都会写入被试专属的 EEGLAB 数据结构 EEGTMP 的 .comments 字段中。这一步实现了单被试处理流程的精细化溯源，能精准定位每个被试的独立操作细节。 全被试级汇总：所有被试的全部预处理步骤会被统一整合到 MATLAB 表格 logtbl 中。该表格为每个预处理脚本分配独立条目，实现跨被试的流程横向对比与整体汇总。 文件输出与命名规范 日志文件以 MATLAB 格式保存，配置了严格的命名规则与存储路径：\n存储格式：保存为 MATLAB 格式化数据文件，后缀为 .mat。 命名规则：文件名遵循固定模板 —— log_",
+  "wordCount" : "5016",
+  "inLanguage": "zh",
+  "datePublished": "2026-04-01T00:00:00Z",
+  "dateModified": "2026-04-09T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "三火"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://three-fire-s.github.io/notes/clean-pipeline/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "三火的精神自留地",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://three-fire-s.github.io/favicon.png"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -99,7 +160,7 @@ code.has-jax {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="三火的精神自留地 (Alt + H)">三火的精神自留地</a>
+            <a href="https://three-fire-s.github.io/" accesskey="h" title="三火的精神自留地 (Alt + H)">三火的精神自留地</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -125,22 +186,22 @@ code.has-jax {
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/notes/" title="笔记">
+                <a href="https://three-fire-s.github.io/notes/" title="笔记">
                     <span>笔记</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/about/" title="关于">
+                <a href="https://three-fire-s.github.io/about/" title="关于">
                     <span>关于</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/archives/" title="归档">
+                <a href="https://three-fire-s.github.io/archives/" title="归档">
                     <span>归档</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/search/" title="搜索 (Alt &#43; /)" accesskey=/>
+                <a href="https://three-fire-s.github.io/search/" title="搜索 (Alt &#43; /)" accesskey=/>
                     <span>搜索</span>
                 </a>
             </li>
@@ -151,7 +212,7 @@ code.has-jax {
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="http://localhost:1313/">主页</a>&nbsp;»&nbsp;<a href="http://localhost:1313/notes/">Notes</a></div>
+    <div class="breadcrumbs"><a href="https://three-fire-s.github.io/">主页</a>&nbsp;»&nbsp;<a href="https://three-fire-s.github.io/notes/">Notes</a></div>
     <h1 class="post-title entry-hint-parent">
       预处理流程-CLEAN pipeline
     </h1>
@@ -494,15 +555,15 @@ code.has-jax {
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/preprocessing/">Preprocessing</a></li>
+      <li><a href="https://three-fire-s.github.io/tags/preprocessing/">Preprocessing</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/notes/makotos-pipeline/">
+  <a class="prev" href="https://three-fire-s.github.io/notes/makotos-pipeline/">
     <span class="title">« 上一页</span>
     <br>
     <span>预处理流程-Makoto&#39;s preprocessing pipeline</span>
   </a>
-  <a class="next" href="http://localhost:1313/notes/icaintroduction/">
+  <a class="next" href="https://three-fire-s.github.io/notes/icaintroduction/">
     <span class="title">下一页 »</span>
     <br>
     <span>ICA数学原理介绍</span>
@@ -520,7 +581,7 @@ code.has-jax {
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">三火的精神自留地</a></span> · 
+        <span>&copy; 2026 <a href="https://three-fire-s.github.io/">三火的精神自留地</a></span> · 
 
     <span>
         Powered by

@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Preprocessing on 三火的精神自留地</title>
-    <link>http://localhost:1313/tags/preprocessing/</link>
+    <link>https://three-fire-s.github.io/tags/preprocessing/</link>
     <description>Recent content in Preprocessing on 三火的精神自留地</description>
     <generator>Hugo -- 0.157.0</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 09 Apr 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/preprocessing/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://three-fire-s.github.io/tags/preprocessing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>预处理流程-Makoto&#39;s preprocessing pipeline</title>
-      <link>http://localhost:1313/notes/makotos-pipeline/</link>
+      <link>https://three-fire-s.github.io/notes/makotos-pipeline/</link>
       <pubDate>Thu, 09 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/makotos-pipeline/</guid>
+      <guid>https://three-fire-s.github.io/notes/makotos-pipeline/</guid>
       <description>阅读Makoto&amp;#39;s preprocessing pipeline过程中的一些记录和梳理，为避免一次性摄入信息过多，笔者将采取挑着读的方式，希望6月前能整理完。</description>
     </item>
     <item>
       <title>预处理流程-CLEAN pipeline</title>
-      <link>http://localhost:1313/notes/clean-pipeline/</link>
+      <link>https://three-fire-s.github.io/notes/clean-pipeline/</link>
       <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/clean-pipeline/</guid>
+      <guid>https://three-fire-s.github.io/notes/clean-pipeline/</guid>
       <description>本文旨在收集论文中的EEG预处理流程，以给实际中的预处理吃下一颗定心丸。</description>
     </item>
   </channel>

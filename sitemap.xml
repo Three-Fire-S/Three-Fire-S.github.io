@@ -2,59 +2,59 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://three-fire-s.github.io/about/</loc>
     <lastmod>2026-04-09T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://three-fire-s.github.io/</loc>
     <lastmod>2026-04-09T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://three-fire-s.github.io/categories/</loc>
     <lastmod>2026-04-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/preprocessing/</loc>
+    <loc>https://three-fire-s.github.io/tags/preprocessing/</loc>
     <lastmod>2026-04-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/reference/</loc>
+    <loc>https://three-fire-s.github.io/tags/reference/</loc>
     <lastmod>2026-04-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://three-fire-s.github.io/tags/</loc>
     <lastmod>2026-04-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://three-fire-s.github.io/categories/%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2026-04-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/resources-for-eeglearn/</loc>
+    <loc>https://three-fire-s.github.io/notes/resources-for-eeglearn/</loc>
     <lastmod>2026-04-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/makotos-pipeline/</loc>
+    <loc>https://three-fire-s.github.io/notes/makotos-pipeline/</loc>
     <lastmod>2026-04-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/clean-pipeline/</loc>
+    <loc>https://three-fire-s.github.io/notes/clean-pipeline/</loc>
     <lastmod>2026-04-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/eeg%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://three-fire-s.github.io/categories/eeg%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2026-03-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/ica/</loc>
+    <loc>https://three-fire-s.github.io/tags/ica/</loc>
     <lastmod>2026-03-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/icaintroduction/</loc>
+    <loc>https://three-fire-s.github.io/notes/icaintroduction/</loc>
     <lastmod>2026-03-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/</loc>
+    <loc>https://three-fire-s.github.io/notes/</loc>
     <lastmod>2026-03-18T22:01:36+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://three-fire-s.github.io/posts/</loc>
     <lastmod>2026-03-18T22:01:30+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/%E6%B5%8B%E8%AF%95/</loc>
+    <loc>https://three-fire-s.github.io/tags/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2026-03-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/my-first-note/</loc>
+    <loc>https://three-fire-s.github.io/notes/my-first-note/</loc>
     <lastmod>2026-03-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/archives/</loc>
+    <loc>https://three-fire-s.github.io/archives/</loc>
   </url><url>
-    <loc>http://localhost:1313/search/</loc>
+    <loc>https://three-fire-s.github.io/search/</loc>
   </url>
 </urlset>
