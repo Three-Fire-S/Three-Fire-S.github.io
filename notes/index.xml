@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Notes on 三火的个人小屋</title>
+    <title>Notes on 三火的精神自留地</title>
     <link>https://three-fire-s.github.io/notes/</link>
-    <description>Recent content in Notes on 三火的个人小屋</description>
+    <description>Recent content in Notes on 三火的精神自留地</description>
     <generator>Hugo -- 0.157.0</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 26 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Apr 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://three-fire-s.github.io/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>预处理流程-CLEAN pipeline</title>
+      <link>https://three-fire-s.github.io/notes/pre-pipeline/</link>
+      <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>https://three-fire-s.github.io/notes/pre-pipeline/</guid>
+      <description>本文旨在收集论文中的EEG预处理流程，以给实际中的预处理吃下一颗定心丸。</description>
+    </item>
     <item>
       <title>ICA数学原理介绍</title>
       <link>https://three-fire-s.github.io/notes/icaintroduction/</link>
