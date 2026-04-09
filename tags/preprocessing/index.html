@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh" dir="auto">
 
-<head><meta charset="utf-8">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, nofollow">
 <title>Preprocessing | 三火的精神自留地</title>
 <meta name="keywords" content="">
 <meta name="description" content="你的网站描述">
 <meta name="author" content="你的名字">
-<link rel="canonical" href="https://three-fire-s.github.io/tags/preprocessing/">
+<link rel="canonical" href="http://localhost:1313/tags/preprocessing/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.b20f4b743d503ecd47181175771c9e32d725cebf35f9563e136707adeb23a646.css" integrity="sha256-sg9LdD1QPs1HGBF1dxyeMtclzr81&#43;VY&#43;E2cHresjpkY=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://three-fire-s.github.io/favicon.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://three-fire-s.github.io/favicon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://three-fire-s.github.io/favicon.png">
-<link rel="apple-touch-icon" href="https://three-fire-s.github.io/favicon.png">
-<link rel="mask-icon" href="https://three-fire-s.github.io/favicon.png">
+<link rel="icon" href="http://localhost:1313/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/favicon.png">
+<link rel="mask-icon" href="http://localhost:1313/favicon.png">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://three-fire-s.github.io/tags/preprocessing/index.xml">
-<link rel="alternate" hreflang="zh" href="https://three-fire-s.github.io/tags/preprocessing/">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/tags/preprocessing/index.xml">
+<link rel="alternate" hreflang="zh" href="http://localhost:1313/tags/preprocessing/">
 <noscript>
     <style>
         #theme-toggle,
@@ -82,12 +82,7 @@ code.has-jax {
     border: inherit;
     color: #515151;
 }
-</style><meta property="og:title" content="Preprocessing" />
-<meta property="og:description" content="你的网站描述" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://three-fire-s.github.io/tags/preprocessing/" />
-
-
+</style>
 </head>
 
 <body class="list" id="top">
@@ -105,7 +100,7 @@ code.has-jax {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://three-fire-s.github.io/" accesskey="h" title="三火的精神自留地 (Alt + H)">三火的精神自留地</a>
+            <a href="http://localhost:1313/" accesskey="h" title="三火的精神自留地 (Alt + H)">三火的精神自留地</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -131,22 +126,22 @@ code.has-jax {
         </div>
         <ul id="menu">
             <li>
-                <a href="https://three-fire-s.github.io/notes/" title="笔记">
+                <a href="http://localhost:1313/notes/" title="笔记">
                     <span>笔记</span>
                 </a>
             </li>
             <li>
-                <a href="https://three-fire-s.github.io/about/" title="关于">
+                <a href="http://localhost:1313/about/" title="关于">
                     <span>关于</span>
                 </a>
             </li>
             <li>
-                <a href="https://three-fire-s.github.io/archives/" title="归档">
+                <a href="http://localhost:1313/archives/" title="归档">
                     <span>归档</span>
                 </a>
             </li>
             <li>
-                <a href="https://three-fire-s.github.io/search/" title="搜索 (Alt &#43; /)" accesskey=/>
+                <a href="http://localhost:1313/search/" title="搜索 (Alt &#43; /)" accesskey=/>
                     <span>搜索</span>
                 </a>
             </li>
@@ -154,7 +149,7 @@ code.has-jax {
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="https://three-fire-s.github.io/">主页</a>&nbsp;»&nbsp;<a href="https://three-fire-s.github.io/tags/">Tags</a></div>
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/">主页</a>&nbsp;»&nbsp;<a href="http://localhost:1313/tags/">Tags</a></div>
   <h1>
     Preprocessing
     <a href="/tags/preprocessing/index.xml" title="RSS" aria-label="RSS">
@@ -170,6 +165,20 @@ code.has-jax {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">预处理流程-Makoto&#39;s preprocessing pipeline
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> 网页地址 Makoto’s preprocessing pipeline - SCCN 插值坏道（2021.6.14更新） 在平均参考和ICA之前插值坏道的主要原因如下：
+最小化半球偏差。假设你有64个通道，你去掉了16个右半球的通道，直接做平均参考时，左半球的比例/权重会更高。 平均参考后的IC地形图是零均值的，这样的地形图很容易去评估。否则，你的地形图会是全红/全蓝的（尽管如此，你可以重新定义颜色映射的尺度）。 如果你在ICA之后插值，你没有办法插值ICA权重EEG.icaweights或ICA空间EEG.icasphere，这会导致后续处理中的问题。就比如说，你可能需要在Cz 电极处计算组水平独立成分（IC）的反向投影。但如果部分被试的 Cz 电极已被剔除，就无法进行该计算。 EEGLAB默认插值方法是球面样条插值，但会引入秩问题：因为非线性插值后的数据不会导致明显的秩亏损，相反，它会增加一个额外的维度，该维度的特征值近乎为0，就比如$&lt;10^8$。换句话说，条件数（condition number）很高，这意味着矩阵是病态的。这样一个小的特征值数值上近似于0，但对我们的ICA算法实际上是0，因此会产生“幽灵IC”的问题，等等。
+...</p>
+  </div>
+  <footer class="entry-footer">发布于 <span title='2026-04-09 00:00:00 +0000 UTC'>2026-04-09</span>&nbsp;·&nbsp;更新于 <span title='2026-04-09 00:00:00 +0000 UTC'>2026-04-09</span>&nbsp;·&nbsp;1719 字&nbsp;·&nbsp;三火</footer>
+  <a class="entry-link" aria-label="post link to 预处理流程-Makoto&#39;s preprocessing pipeline" href="http://localhost:1313/notes/makotos-pipeline/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">预处理流程-CLEAN pipeline
     </h2>
   </header>
@@ -178,12 +187,12 @@ code.has-jax {
 ...</p>
   </div>
   <footer class="entry-footer">发布于 <span title='2026-04-01 00:00:00 +0000 UTC'>2026-04-01</span>&nbsp;·&nbsp;更新于 <span title='2026-04-09 00:00:00 +0000 UTC'>2026-04-09</span>&nbsp;·&nbsp;5016 字&nbsp;·&nbsp;三火</footer>
-  <a class="entry-link" aria-label="post link to 预处理流程-CLEAN pipeline" href="https://three-fire-s.github.io/notes/pre-pipeline/"></a>
+  <a class="entry-link" aria-label="post link to 预处理流程-CLEAN pipeline" href="http://localhost:1313/notes/clean-pipeline/"></a>
 </article>
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="https://three-fire-s.github.io/">三火的精神自留地</a></span> · 
+        <span>&copy; 2026 <a href="http://localhost:1313/">三火的精神自留地</a></span> · 
 
     <span>
         Powered by

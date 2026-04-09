@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>EEG学习 on 三火的精神自留地</title>
-    <link>https://three-fire-s.github.io/categories/eeg%E5%AD%A6%E4%B9%A0/</link>
+    <link>http://localhost:1313/categories/eeg%E5%AD%A6%E4%B9%A0/</link>
     <description>Recent content in EEG学习 on 三火的精神自留地</description>
     <generator>Hugo -- 0.157.0</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 26 Mar 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://three-fire-s.github.io/categories/eeg%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/eeg%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ICA数学原理介绍</title>
-      <link>https://three-fire-s.github.io/notes/icaintroduction/</link>
+      <link>http://localhost:1313/notes/icaintroduction/</link>
       <pubDate>Fri, 20 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://three-fire-s.github.io/notes/icaintroduction/</guid>
+      <guid>http://localhost:1313/notes/icaintroduction/</guid>
       <description>这是一篇搬砖中的ICA数学原理介绍笔记，目的仅为记录自己的学习过程，适合新手小白，笔者可能会随时间不断精进。加油吧各位~</description>
     </item>
   </channel>

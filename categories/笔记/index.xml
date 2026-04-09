@@ -2,24 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>笔记 on 三火的精神自留地</title>
-    <link>https://three-fire-s.github.io/categories/%E7%AC%94%E8%AE%B0/</link>
+    <link>http://localhost:1313/categories/%E7%AC%94%E8%AE%B0/</link>
     <description>Recent content in 笔记 on 三火的精神自留地</description>
     <generator>Hugo -- 0.157.0</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 09 Apr 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://three-fire-s.github.io/categories/%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>参考资料一览-EEG学习</title>
+      <link>http://localhost:1313/notes/resources-for-eeglearn/</link>
+      <pubDate>Thu, 09 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/resources-for-eeglearn/</guid>
+      <description>这篇笔记将收纳一下EEG学习过程中可能会用到的参考资料，持续更新ing</description>
+    </item>
+    <item>
+      <title>预处理流程-Makoto&#39;s preprocessing pipeline</title>
+      <link>http://localhost:1313/notes/makotos-pipeline/</link>
+      <pubDate>Thu, 09 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/makotos-pipeline/</guid>
+      <description>阅读Makoto&amp;#39;s preprocessing pipeline过程中的一些记录和梳理，为避免一次性摄入信息过多，笔者将采取挑着读的方式，希望6月前能整理完。</description>
+    </item>
     <item>
       <title>预处理流程-CLEAN pipeline</title>
-      <link>https://three-fire-s.github.io/notes/pre-pipeline/</link>
+      <link>http://localhost:1313/notes/clean-pipeline/</link>
       <pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate>
-      <guid>https://three-fire-s.github.io/notes/pre-pipeline/</guid>
+      <guid>http://localhost:1313/notes/clean-pipeline/</guid>
       <description>本文旨在收集论文中的EEG预处理流程，以给实际中的预处理吃下一颗定心丸。</description>
     </item>
     <item>
       <title>我的第一篇笔记</title>
-      <link>https://three-fire-s.github.io/notes/my-first-note/</link>
+      <link>http://localhost:1313/notes/my-first-note/</link>
       <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
-      <guid>https://three-fire-s.github.io/notes/my-first-note/</guid>
+      <guid>http://localhost:1313/notes/my-first-note/</guid>
       <description>这是我的第一篇测试笔记</description>
     </item>
   </channel>
